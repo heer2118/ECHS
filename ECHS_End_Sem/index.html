@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Video Processing</title>
+    <style>
+        body{
+            background-image: url('{{ url_for('static', filename='bg-image.webp') }}')
+        }
+        .container{
+            width: 26em;
+            height: 21em;
+            display: flex;
+            align-items: center;
+            flex-direction: column;
+            justify-content: center;
+            background-color: lightgrey;
+            translate: 10% 7%;
+        }
+        h1{
+            width: 50%;
+        }
+
+        form{
+            gap: 8px;
+            display: flex;
+            flex-direction: column;
+        }
+        button{
+            cursor: pointer;
+        }
+        
+    </style>
+</head>
+<body>
+    <div class="container">  
+    
+    <h1>Upload a video for processing</h1>
+    
+    <!-- Display Flash Messages -->
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            <ul style="color: green; font-size: 17px">
+                {% for message in messages %}
+                    <li>{{ message }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    {% endwith %}
+
+    <form action="/upload" method="POST" enctype="multipart/form-data">
+        <label for="file">Select video file:</label>
+        <input type="file" name="file" id="file" accept="video/mp4,video/avi,video/mov" required>
+        <button type="submit">Upload and Process</button>
+    </form>
+</div>
+</body>
+</html>
